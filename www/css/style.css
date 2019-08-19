@@ -1,0 +1,32 @@
+/**/
+
+.container{
+  background: linear-gradient(to bottom, salmon, indianred, firebrick);
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.linha{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@font-face{
+  font-family: "OpAmp";
+  src: url("../fonts/operational_amplifier.ttf") format("truetype");
+}
+
+h1{
+  color: white;
+  font-family: OpAmp;
+}
+
+h2{
+  color: white;
+  font-family: OpAmp;
+}
+
+.btn{
+  font-size: 18px;
+}

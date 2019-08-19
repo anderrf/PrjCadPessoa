@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="components/jquery-3.3.1.min.js"></script>
+  <script src="components/acao.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      desabilita();
+    });
+  </script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <div class="container">
+
+      <div class="row linha">
+        <div class="col-xs-12">
+          <h2>Listar</h2>
+        </div>
+      </div>
+
+      <div class="jumbotron">
+
+        <div class="row linha">
+          <div class="col-xs-12">
+            <label for="">Selecione:</label>
+            <select class="form-control" name="lista" id="lista"></select>
+          </div>
+        </div>
+        
+        <div class="row linha">
+          <div class="col-xs-12">
+            <label for="">Nome:</label>
+            <input class="form-control" type="text" name="nome" id="nome" maxlength="100">
+          </div>
+        </div>
+
+        <div class="row linha">
+
+          <div class="col-xs-6">
+            <label for="">Idade:</label>
+            <input class="form-control" type="number" name="idade" id="idade" maxlength="3">
+          </div>
+
+          <div class="col-xs-6">
+            <label for="">Sexo:</label>
+            <select class="form-control" name="sexo" id="sexo">
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="row linha">
+          <div class="col-xs-12">
+            <label for="">Endereço:</label>
+            <input type="text" class="form-control" name="endereco" id="endereco" maxlength="100">
+          </div>
+        </div>
+
+        <div class="row linha">
+          <div class="col-xs-12">
+            <label for="">CPF (apenas números):</label>
+            <input type="number" class="form-control" name="cpf" id="cpf" maxlength="11">
+          </div>
+        </div>
+
+        <div id="rfoto">
+
+          <div class="row linha">
+            <div class="col-xs-12">
+              <label for="">Foto:</label>
+              <input type="file" class="form-control" name="foto" id="foto" onchange="mostrarImg(this)">
+            </div>
+          </div>
+
+          <div class="row linha">
+            <div class="col-xs-12">
+              <img src="" alt="" class="img-responsive" id="imgFoto">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row linha">
+
+          <div class="col-xs-3">
+            <button class="btn btn-block btn-primary" id="btnEditar" onclick="habilita()">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </div>
+
+          <div class="col-xs-3">
+            <button class="btn btn-block btn-success" id="btnSalvarAlterar">
+              <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+          </div>
+
+          <div class="col-xs-3">
+            <button class="btn btn-block btn-warning" id="btnCancelar">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </div>
+
+          <div class="col-xs-3">
+            <button class="btn btn-block btn-danger" id="btnExcluir">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </div>
+
+        </div>
+
+        <div class="row linha">
+          <div class="col-xs-3">
+            <button class="btn btn-block btn-info">
+              <span class="glyphicon glyphicon-qrcode"></span>
+            </button>
+          </div>
+          <div class="col-xs-6"></div>
+          <div class="col-xs-3">
+            <button class="btn btn-block btn-danger" id="btnVoltar">
+              <span class="glyphicon glyphicon-arrow-left"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+</body>
+</html>
