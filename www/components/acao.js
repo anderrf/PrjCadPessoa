@@ -70,7 +70,7 @@ $(document).on("click", "#btnCadastrar", function(){
     form_data.append("cpf", $("#cpf").val());
 
     $.ajax({
-      url:"",
+      url:"https://dimorphous-seesaws.000webhostapp.com/cadastro.php",
       method: "post",
       data: form_data,
       contentType: false,
@@ -87,13 +87,13 @@ $(document).on("click", "#btnCadastrar", function(){
 function lista(){
   $.ajax({
         type:"post", //como enviar
-        url:"",//para onde enviar
+        url:"https://dimorphous-seesaws.000webhostapp.com/listar.php",//para onde enviar
         dataType:"json",
         //se der certo
         success: function(data){
             var itemlista = "";
             $.each(data.pessoa,function(i,dados){
-              itemlista += "<option value='"+dados.codigo+"'>"+dados.nome+"</option>"; 
+              itemlista += "<option value='"+dados.codigo+"'>"+dados.nome+"</option>";
             });
         $("#lista").html(itemlista);
         },
@@ -103,6 +103,30 @@ function lista(){
         }
     });
 }
+
+$(document).on("change", "#lista", function(){
+  var codigoEscolhido = $("option:selected", ("#lista")).val();
+  $.ajax({
+    type: "post", //como enviar
+    url: "https://dimorphous-seesaws.000webhostapp.com/lista_um.php", //para onde enviar
+    data: "codigo="+codigoEscolhido,
+    dataType:"json",
+    //se der certo
+    success: function(data){
+      $("#codigo").val(data.pessoa.codigo);
+      $("#nome").val(data.pessoa.nome);
+      $("#idade").val(data.pessoa.idade);
+      $("#sexo").val(data.pessoa.sexo);
+      $("#endereco").val(data.pessoa.endereco);
+      $("#cpf").val(data.pessoa.cpf);
+      $("#imgfoto").attr('src', "https://dimorphous-seesaws.000webhostapp.com/foto/"+data.livro.imagem);
+    },
+    //se der errado
+    error: function(data){
+      navigator.notification.alert(data);
+    }
+  });
+});
 
 $(document).on("click", "#btnSalvarAlterar", function(){
   var prop = document.getElementById('foto').files[0];
@@ -123,7 +147,7 @@ $(document).on("click", "#btnSalvarAlterar", function(){
     form_data.append("cpf", $("#cpf").val());
 
     $.ajax({
-      url:"",
+      url:"https://dimorphous-seesaws.000webhostapp.com/alterar.php",
       method: "post",
       data: form_data,
       contentType: false,
@@ -141,7 +165,7 @@ $(document).on("click", "#btnExcluir", function(){
   var codigoEscolhido = $("#codigo").val();
   $.ajax({
     type: "post",
-    url: "",
+    url: "https://dimorphous-seesaws.000webhostapp.com/deleta.php",
     data: "codigo="+codigoEscolhido,
     dataType: "json",
     success: function(data){
