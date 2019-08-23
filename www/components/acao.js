@@ -14,7 +14,6 @@ function habilita(){
   $("#sexo").prop("readonly", false);
   $("#endereco").prop("readonly", false);
   $("#cpf").prop("readonly", false);
-  $("#rfoto").prop("hidden", false);
 }
 
 function desabilita(){
@@ -23,7 +22,6 @@ function desabilita(){
   $("#sexo").prop("readonly", true);
   $("#endereco").prop("readonly", true);
   $("#cpf").prop("readonly", true);
-  $("#rfoto").prop("hidden", true);
 }
 
 function mostrarImg(input){
@@ -119,7 +117,7 @@ $(document).on("change", "#lista", function(){
       $("#sexo").val(data.pessoa.sexo);
       $("#endereco").val(data.pessoa.endereco);
       $("#cpf").val(data.pessoa.cpf);
-      $("#imgfoto").attr('src', "https://dimorphous-seesaws.000webhostapp.com/foto/"+data.livro.imagem);
+      $("#imgFoto").attr('src', "https://dimorphous-seesaws.000webhostapp.com/"+data.pessoa.foto);
     },
     //se der errado
     error: function(data){
@@ -175,28 +173,35 @@ $(document).on("click", "#btnExcluir", function(){
     error: function(data){
       navigator.notification.alert(data);
     }
-  })
+  });
 });
 
 $(document).on("click", "#btnScan", function(){
-  scanBarcode();
+  cordova.plugins.barcodeScanner.scan(
+      function (result) {
+        listascan(parseInt(result.text));
+      },
+      function (error) {
+          alert("Scanning failed: " + error);
+      },
+      {
+          preferFrontCamera : false, // iOS and Android
+          showFlipCameraButton : true, // iOS and Android
+          prompt : "Posicione um código de barras ou qr code na tela demarcada (apenas números)", // Android
+          resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+          formats : "CODE_39,QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+          orientation : "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
+          disableSuccessBeep: false // iOS and Android
+      }
+   );
 });
 
-function scanBarcode() {
-    window.plugins.barcodeScanner.scan( function(result) {
-      listascan(result.text);
-    }, 
-    function(error) {
-       alert("Falha de escaneamento: " + error);
-    }
-    );
-}
 
 function listascan(codigo){
   var codigoescolhido = codigo;
     $.ajax({
         type:"post", //como enviar
-        url:"",//para onde enviar
+        url:"https://dimorphous-seesaws.000webhostapp.com/lista_um.php",//para onde enviar
         data: "codigo="+codigoescolhido,
         dataType:"json",
           //se der certo
@@ -206,7 +211,8 @@ function listascan(codigo){
           $("#idade").val(data.pessoa.idade)
           $("#sexo").val(data.pessoa.sexo);
           $("#endereco").val(data.pessoa.endereco);
-          $("#cpf").val(data.pessoa.cpf); 
+          $("#cpf").val(data.pessoa.cpf);
+          $("#imgFoto").attr('src', "https://dimorphous-seesaws.000webhostapp.com/"+data.pessoa.foto);
         },
         //se der errado
         error: function(data){

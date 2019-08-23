@@ -20,11 +20,15 @@
 h1{
   color: white;
   font-family: OpAmp;
+  text-align: center;
+  font-size: 40px;
 }
 
 h2{
   color: white;
   font-family: OpAmp;
+  text-align: center;
+  font-size: 30px;
 }
 
 .btn{
